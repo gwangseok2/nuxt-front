@@ -56,7 +56,7 @@
 
         beforeDestroy() {
             clearInterval(this.intervel);
-        }
+        },
 
         methods: {
             
