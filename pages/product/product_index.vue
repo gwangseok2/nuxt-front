@@ -1,10 +1,18 @@
 
 <template>
-    <div>
+    <div class="game-wrapper">
         <h1>
             가위바위보 모션
         </h1>
         <figure id="computer-banner" :style="computedStyleObject"></figure>
+
+        <div>
+            <button @click="select('가위')">가위</button>
+            <button @click="select('바위')">바위</button>
+            <button @click="select('보')">보</button>
+        </div>
+        <div>{{ result }}</div>
+        <p>현재 점수{{ scroe }}점</p>
     </div>
 </template>
 
@@ -20,6 +28,8 @@
             return {
                 Img: imgRotate.가위,
                 interver : null,
+                score:0,
+                result:'',
             }
         },
         
@@ -44,9 +54,14 @@
             },500);
         },
 
+        beforeDestroy() {
+            clearInterval(this.intervel);
+        }
+
         methods: {
             
         },
+
 
     }
 </script>
@@ -56,6 +71,11 @@
         width: 142px;
         height: 200px;
         border: 1px solid #1f80fd;
-        /* transition: all 0.5s; */
+        margin: 0 auto;
+    }
+    .game-wrapper {
+        max-width: 1024px;
+        margin: 0 auto;
+        text-align: center;
     }
 </style> 
