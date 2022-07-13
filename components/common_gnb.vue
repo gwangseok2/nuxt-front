@@ -1,6 +1,6 @@
 <template>
     <header>
-        <h1>토이</h1>
+        <nuxt-link :to="{ path: '/' }"><h1>토이</h1></nuxt-link>
         <ul>
             <li>{{ message }}</li>
             <li><button @click="changeData">워딩반전버튼</button></li>
