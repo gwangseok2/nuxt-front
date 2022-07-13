@@ -42,6 +42,7 @@
                 interver : null,
                 score:0,
                 result:'',
+                check:true,
             }
         },
         
@@ -74,7 +75,7 @@
                     } else if (this.Img === imgRotate.보) {
                         this.Img = imgRotate.바위
                     }
-                },500);
+                },100);
 
             },
 
@@ -94,10 +95,15 @@
                     this.result = '졌습니다.';
                     this.score -= 1;
                 }
-
-                setTimeout(() => {
-                    this.changeHand();
-                },1000);
+                
+                if(this.check === true) {
+                    this.check = false;
+                    setTimeout(() => {
+                        this.changeHand();
+                        this.check = true;
+                    },1000);
+                }
+                
             }
         },
 
