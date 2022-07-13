@@ -17,7 +17,7 @@
                 onePageData: 16,
                 
                 // 빈 배열
-                commentlist : [],
+                pageList : [],
                 
             }
         },
@@ -29,6 +29,10 @@
 
             endPage() {
                 return (this.startPage + this.onePageData);
+            },
+
+            thisPage() {
+                return Math.ceil(this.pageList.length / this.onePageData);
             }
         }
 

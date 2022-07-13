@@ -21,8 +21,8 @@
         },
         
         watch: {
-            message(oldVal, newVal) {
-                console.log(oldVal, newVal);
+            message(newVal, oldVal) {
+                console.log(newVal, oldVal);
                 this.watch = '감시후'
             }
         },
