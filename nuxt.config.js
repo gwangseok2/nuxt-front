@@ -1,5 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
-
+require('dotenv').config()
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -65,6 +65,13 @@ export default {
     },
   },
 
+  env: {
+    ENV: process.env.ENV,
+    API_KEY: process.env.API_KEY
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    postcss: null,
+  },
 }
