@@ -1,21 +1,19 @@
 <template>
-	<div>
-		<CommonGnb/>
-		<nuxt />
-	</div>
+  <div>
+    <CommonGnb />
+    <nuxt />
+  </div>
 </template>
 
 <script>
-import CommonGnb from '@/components/common_gnb.vue';
+import CommonGnb from '@/components/CommonGnb.vue'
 export default {
-	name: 'DefaultLayout',
+  name: 'DefaultLayout',
 
-	components:{CommonGnb},
+  components: { CommonGnb },
 
-	data() {
-		return {
-      
-    	}
-	},
+  data() {
+    return {}
+  },
 }
 </script>
