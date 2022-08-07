@@ -2,6 +2,7 @@
   <header>
     <nuxt-link :to="{ path: '/' }"><h1>토이</h1></nuxt-link>
     <ul>
+      <nuxt-link :to="{ path: '/product' }" tag="li">Product</nuxt-link>
       <li>{{ message }}</li>
       <li><button @click="changeData">워딩반전버튼</button></li>
       <li>{{ watch }}</li>
