@@ -1,6 +1,10 @@
 import colors from 'vuetify/es5/util/colors'
 require('dotenv').config()
 export default {
+  env: {
+    BASE_URL: process.env.BASE_URL,
+  },
+
   // server setup
   server: {
     port: 5000,
@@ -23,7 +27,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ['@/assets/css/reset.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
@@ -47,8 +51,12 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    proxy: true,
+  },
+
+  proxy: {
+    '/api': 'http://localhost:3000',
+    // '/': 'http://localhost:3000',
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -68,11 +76,6 @@ export default {
         },
       },
     },
-  },
-
-  env: {
-    ENV: process.env.ENV,
-    API_KEY: process.env.API_KEY,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
