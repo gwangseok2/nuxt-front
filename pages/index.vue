@@ -39,6 +39,8 @@ export default {
     }))
     // eslint-disable-next-line no-console
     // console.log('구조분해 프로덕트', ...products)
+
+    // 리턴값은 data와 결합된다 this로 접근가능.
     return { products }
   },
   data() {
@@ -50,9 +52,15 @@ export default {
     moveToDetail(id) {
       this.$router.push(`detail/${id}`)
     },
+
+    // 맵을 이용해서 필터링을 쉽게 할 수 있지 않을까?... 생각해보자.
     async searchProducts() {
       const response = await fetchProductByKeyword(this.searchKeyword)
       console.log(response.data)
+      this.products = response.data.map((item) => ({
+        ...item,
+        imageUrl: `${item.imageUrl}?random=${Math.random()}`,
+      }))
     },
   },
 }

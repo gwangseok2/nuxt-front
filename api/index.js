@@ -8,6 +8,11 @@ function fetchProductById(id) {
   return instance.get(`/products/${id}`)
 }
 
+// function fetchProductByKeyword(keyword) {
+//   return instance.get(`/products?name_like=${keyword}`)
+// }
+
+// 위의 방식에서 axios 내에 있는 params로 바꾼 버전
 function fetchProductByKeyword(keyword) {
   return instance.get(`/products`, {
     params: {
