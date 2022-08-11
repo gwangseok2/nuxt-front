@@ -21,6 +21,9 @@
         </li>
       </ul>
     </main>
+    <aside class="right-float-btn" @click="$router.push('/cart')">
+      <div>Cart To</div>
+    </aside>
   </div>
 </template>
 
@@ -56,7 +59,6 @@ export default {
     // 맵을 이용해서 필터링을 쉽게 할 수 있지 않을까?... 생각해보자.
     async searchProducts() {
       const response = await fetchProductByKeyword(this.searchKeyword)
-      console.log(response.data)
       this.products = response.data.map((item) => ({
         ...item,
         imageUrl: `${item.imageUrl}?random=${Math.random()}`,
@@ -97,5 +99,21 @@ export default {
   height: 40px;
   font-size: 1rem;
   font-weight: 500;
+}
+.right-float-btn {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: fixed;
+  right: 20px;
+  bottom: 50px;
+  background: #1f80fd;
+  color: #fff;
+}
+.right-float-btn div {
+  text-align: center;
+  line-height: 99px;
+  font-size: 20px;
+  font-weight: bold;
 }
 </style>

@@ -11,7 +11,7 @@
       <div class="side-panel">
         <p class="name">{{ product.name }}</p>
         <p class="price">{{ product.price }}</p>
-        <!-- <button type="button" @click="addToCart">Add to Cart</button> -->
+        <button type="button" @click="addToCart">Add to Cart</button>
       </div>
     </div>
   </div>
@@ -34,6 +34,20 @@ export default {
   //     console.log(id)
   //     fetchProductById(id);
   //   },
+  data() {
+    return {
+      pang: 1,
+    }
+  },
+  methods: {
+    addToCart() {
+      this.$store.commit('addCartItem', {
+        cartItem: this.product,
+        pang: this.pang,
+      })
+      this.$router.push('/cart')
+    },
+  },
 }
 </script>
 
@@ -54,5 +68,10 @@ export default {
   width: 220px;
   text-align: center;
   padding: 0 1rem;
+}
+button {
+  border: 1px solid #ccc;
+  font-size: 14px;
+  font-weight: bold;
 }
 </style>
