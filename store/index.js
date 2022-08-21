@@ -8,7 +8,11 @@ export const state = () => ({
 // 전부다 export로 꺼냄 첫번째 파라미터로 state를 받음 2번째 인자 2개이상 받을시 객체로 선언
 export const mutations = {
   addCartItem(state, { cartItem, pang }) {
+    const newCartItem = {
+      ...cartItem,
+      imageUrl: `${cartItem.imageUrl}?random=${Math.random()}`,
+    }
     console.log(pang, cartItem)
-    state.cartItems.push(cartItem)
+    state.cartItems.push(newCartItem)
   },
 }

@@ -7,17 +7,16 @@
       <li>{{ cartitem.name }}</li>
       <li>{{ cartitem.price }}</li>
     </ul>
+    <div>
+      <button>구매하기</button>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   async asyncData({ store }) {
-    let cartList = await store.state.cartItems
-    cartList = cartList.map((item) => ({
-      ...item,
-      imageUrl: `${item.imageUrl}?random=${Math.random()}`,
-    }))
+    const cartList = await store.state.cartItems
     return { cartList }
   },
 }
