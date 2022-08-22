@@ -21,4 +21,19 @@ function fetchProductByKeyword(keyword) {
   })
 }
 
-export { fetchProductById, fetchProductByKeyword }
+// carts
+function fetchCartItems() {
+  return instance.get('/carts')
+}
+
+function createCartItem(cartItem) {
+  // 두번째 인자 값은 payload 던져줄 값.
+  return instance.post('/carts', cartItem)
+}
+
+export {
+  fetchProductById,
+  fetchProductByKeyword,
+  createCartItem,
+  fetchCartItems,
+}

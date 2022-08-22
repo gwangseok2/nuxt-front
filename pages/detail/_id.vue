@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { fetchProductById } from '@/api/index'
+import { fetchProductById, createCartItem } from '@/api/index'
 export default {
   async asyncData({ params }) {
     const id = params.id
@@ -28,23 +28,17 @@ export default {
     const product = response.data
     return { product }
   },
-  //   created() {
-  //     const id = this.$route.params.id
-  //     // eslint-disable-next-line no-console
-  //     console.log(id)
-  //     fetchProductById(id);
-  //   },
   data() {
     return {
       pang: 1,
     }
   },
   methods: {
-    addToCart() {
-      this.$store.commit('addCartItem', {
-        cartItem: this.product,
-        pang: this.pang,
-      })
+    async addToCart() {
+      const res = await createCartItem(this.product)
+      // eslint-disable-next-line no-console
+      console.log(res)
+      this.$store.commit('addCartItem', this.product)
       this.$router.push('/cart')
     },
   },
