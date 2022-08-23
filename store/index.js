@@ -29,6 +29,25 @@ export const actions = {
   async [FETCH_CART_ITEMS]({ commit }) {
     const { data } = await fetchCartItems()
     console.log(data, '액션즈')
-    commit('setCartItems', data)
+    commit(
+      'setCartItems',
+      data.map((item) => ({
+        ...item,
+        imageUrl: `${item.imageUrl}?random=${Math.random()}`,
+      }))
+    )
+  },
+  // store의 Context와 nuxt의 Context를 제공
+  async nuxtServerInit(storeContext, nuxtContext) {
+    const { data } = await fetchCartItems()
+    console.log(data, '액션즈')
+    // store의 context인 commit을 호출.
+    storeContext.commit(
+      'setCartItems',
+      data.map((item) => ({
+        ...item,
+        imageUrl: `${item.imageUrl}?random=${Math.random()}`,
+      }))
+    )
   },
 }
