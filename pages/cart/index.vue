@@ -14,16 +14,15 @@
 </template>
 
 <script>
-import { FETCH_CART_ITEMS } from '@/store'
+// import { FETCH_CART_ITEMS } from '@/store'
 export default {
   // async asyncData({ store }) {
   //   const cartList = await store.state.cartItems
   //   return { cartList }
   // },
-
-  async asyncData({ store }) {
-    await store.dispatch(FETCH_CART_ITEMS)
-  },
+  // async asyncData({ store }) {
+  //   await store.dispatch(FETCH_CART_ITEMS)
+  // },
 }
 </script>
 
