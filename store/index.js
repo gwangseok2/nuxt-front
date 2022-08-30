@@ -40,17 +40,17 @@ export const actions = {
   // store의 Context와 nuxt의 Context를 제공 따로 호출 할 필요 없음. 서버사이드에서 호출하고 싶을 때
   // 일종의 라이프 사이클 훅 같음.
   // 아니면 미리 데이터를 넣고 싶어서 dispatch만 모아둘 때 여러개의 액션 함수 처리
-  async nuxtServerInit(storeContext, nuxtContext) {
-    // const { data } = await fetchCartItems()
-    // console.log(data, '액션즈')
-    // // store의 context인 commit을 호출.
-    // storeContext.commit(
-    //   'setCartItems',
-    //   data.map((item) => ({
-    //     ...item,
-    //     imageUrl: `${item.imageUrl}?random=${Math.random()}`,
-    //   }))
-    // )
-    await storeContext.dispatch(FETCH_CART_ITEMS)
-  },
+  // async nuxtServerInit(storeContext, nuxtContext) {
+  // const { data } = await fetchCartItems()
+  // console.log(data, '액션즈')
+  // // store의 context인 commit을 호출.
+  // storeContext.commit(
+  //   'setCartItems',
+  //   data.map((item) => ({
+  //     ...item,
+  //     imageUrl: `${item.imageUrl}?random=${Math.random()}`,
+  //   }))
+  // )
+  // await storeContext.dispatch(FETCH_CART_ITEMS)
+  // },
 }
