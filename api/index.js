@@ -2,7 +2,7 @@ import axios from 'axios'
 const instance = axios.create({
   // baseURL: process.env.BASE_URL,
 
-  baseURL: 'http://localhost:3000',
+  baseURL: process.env.BASE_URL,
 })
 function fetchProductById(id) {
   return instance.get(`/products/${id}`)
