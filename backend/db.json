@@ -205,6 +205,24 @@
       "name": "Small Fresh Soap",
       "price": "777.00",
       "imageUrl": "http://placeimg.com/640/480/fashion"
+    },
+    {
+      "id": 2,
+      "name": "Handcrafted Frozen Pizza",
+      "price": "315.00",
+      "imageUrl": "http://placeimg.com/640/480/fashion"
+    },
+    {
+      "id": 11,
+      "name": "Refined Fresh Chicken",
+      "price": "209.00",
+      "imageUrl": "http://placeimg.com/640/480/fashion"
+    },
+    {
+      "id": 12,
+      "name": "Refined Fresh Chicken",
+      "price": "209.00",
+      "imageUrl": "http://placeimg.com/640/480/fashion"
     }
   ]
 }
