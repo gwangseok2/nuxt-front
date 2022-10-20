@@ -8,6 +8,9 @@
       <li>{{ message }}</li>
       <li><button @click="changeData">워딩반전버튼</button></li>
       <li>{{ watch }}</li>
+      <li>
+        <nuxt-link :to="{ path: '/study' }">스터디 페이지</nuxt-link>
+      </li>
     </ul>
   </header>
 </template>
