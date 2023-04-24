@@ -1,6 +1,6 @@
 <template>
   <header>
-    <nuxt-link :to="{ path: '/' }"><h1>토이</h1></nuxt-link>
+    <nuxt-link :to="{ path: '/' }"><h1>빌드테스트01</h1></nuxt-link>
     <ul>
       <nuxt-link :to="{ path: '/detail/product_game' }" tag="li"
         >가위바위보게임</nuxt-link
@@ -28,7 +28,7 @@ export default {
 
   watch: {
     message(newVal, oldVal) {
-      console.log(newVal, oldVal)
+      console.log(newVal, oldVal);
       this.watch = '감시후'
     },
   },
