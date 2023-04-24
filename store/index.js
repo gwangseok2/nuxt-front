@@ -21,6 +21,7 @@ export const mutations = {
     state.cartItems.push(newCartItem)
   },
   setCartItems(state, cartItems) {
+    console.log(cartItems, 'asd')
     state.cartItems = cartItems
   },
   refreshCount(state, data) {
@@ -36,10 +37,17 @@ export const actions = {
     console.log(data, '액션즈')
     commit(
       'setCartItems',
-      data.map((item) => ({
-        ...item,
-        imageUrl: `${item.imageUrl}?random=${Math.random()}`,
-      }))
+      // data.map((item) => ({
+      //   ...item,
+      //   imageUrl: `${item.imageUrl}?random=${Math.random()}`,
+      // }))
+      data.map((item) => {
+        console.log(item)
+        return {
+          // ...item,
+          imageUrl: `${item.imageUrl}?random=${Math.random()}`,
+        }
+      })
     )
   },
   // store의 Context와 nuxt의 Context를 제공 따로 호출 할 필요 없음. 서버사이드에서 호출하고 싶을 때
