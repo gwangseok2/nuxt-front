@@ -1,0 +1,17 @@
+diff a/.eslintrc.js b/.eslintrc.js	(rejected hunks)
+@@ -12,11 +12,15 @@
+    plugins: [],
+    // add your custom rules here
+    rules: {
+++<<<<<<< Updated upstream
+ +    'vue/multi-word-component-names': [
+ +      'error',
+ +      {
+ +        ignores: ['index'],
+ +      },
+ +    ],
+++=======
++     'vue/multi-word-component-names': 'off',
+++>>>>>>> Stashed changes
+    },
+  }
