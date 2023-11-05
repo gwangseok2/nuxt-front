@@ -72,7 +72,7 @@ export default {
 
 <style lang="scss" scoped>
 .profile {
-  font-family: 'Pretendard';
+  font-family: 'Pretendard', sans-serif;
   padding: 0 4.444444%;
   &-img {
     width: 120px;
@@ -125,6 +125,12 @@ export default {
         span:first-child {
           display: flex;
           align-items: center;
+          color: #222;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 140%; /* 22.4px */
+          letter-spacing: -0.32px;
         }
         img {
           width: 32px;
