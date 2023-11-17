@@ -176,10 +176,11 @@ export default {
   },
   methods: {
     mostPriceFilter() {
-      // this.mockData = this.mockData.reduce((prev, el) => {
-      //   return prev.realPrice >= el.realPrice ? prev : el
-      // })
-      console.log(...this.mockData)
+      this.mockData = this.mockData.reduce((prev, el) => {
+        return prev.realPrice >= el.realPrice ? prev : el
+      })
+      this.mockData.map((el) => console.log(el.realPrice))
+
       console.log(Array.isArray(...this.mockData))
       console.log(Math.max(...this.mockData.map((o) => o.realPrice)))
     },

@@ -37,7 +37,7 @@ export default {
     // eslint-disable-next-line no-console
     const products = response.data.map((item) => ({
       ...item,
-      imageUrl: `${item.imageUrl}?random=${Math.random()}`,
+      imageUrl: `https://picsum.photos/200/300?random=${Math.random()}`,
     }))
     // eslint-disable-next-line no-console
     // console.log('구조분해 프로덕트', ...products)

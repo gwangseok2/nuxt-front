@@ -22,10 +22,9 @@ import { fetchProductById, createCartItem } from '@/api/index'
 export default {
   async asyncData({ params }) {
     const id = params.id
-    const response = await fetchProductById(id)
-    // eslint-disable-next-line no-console
-    console.log(response, '리스뽄스')
-    const product = response.data
+    const { data } = await fetchProductById(id)
+    const product = data
+    product.imageUrl = `https://picsum.photos/200/300?${Math.random()}?random=${Math.random()}`
     return { product }
   },
   data() {
