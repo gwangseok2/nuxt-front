@@ -15,7 +15,7 @@ export const mutations = {
   addCartItem(state, cartItem) {
     const newCartItem = {
       ...cartItem,
-      imageUrl: `${cartItem.imageUrl}?random=${Math.random()}`,
+      imageUrl: `${cartItem.imageUrl}`,
     }
     console.log(cartItem)
     state.cartItems.push(newCartItem)
@@ -33,12 +33,11 @@ export const mutations = {
 export const actions = {
   async [FETCH_CART_ITEMS]({ commit }) {
     const { data } = await fetchCartItems()
-    console.log(data, '액션즈')
     commit(
       'setCartItems',
       data.map((item) => ({
         ...item,
-        imageUrl: `${item.imageUrl}?random=${Math.random()}`,
+        imageUrl: `${item.imageUrl}`,
       }))
     )
   },

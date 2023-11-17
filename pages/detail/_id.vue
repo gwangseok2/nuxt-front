@@ -24,7 +24,7 @@ export default {
     const id = params.id
     const { data } = await fetchProductById(id)
     const product = data
-    product.imageUrl = `https://picsum.photos/200/300?${Math.random()}?random=${Math.random()}`
+    product.imageUrl = `https://picsum.photos/200/300`
     return { product }
   },
   data() {
