@@ -37,7 +37,7 @@ export const actions = {
       'setCartItems',
       data.map((item) => ({
         ...item,
-        imageUrl: `${item.imageUrl}`,
+        imageUrl: `https://picsum.photos/200/300`,
       }))
     )
   },
