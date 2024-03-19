@@ -32,22 +32,24 @@ export default {
   margin: 0 auto;
   display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: space-between;
   padding: 30px 0;
   margin-top: 20px;
   .title {
     font-size: 35px;
   }
   .bar {
-    font-size: 80px;
+    font-size: min(10vw, 80px);
   }
   & > .lotto-item {
-    height: 100px;
-    line-height: 99px;
+    flex-shrink: 0;
     border: 2px solid #593af8;
     border-radius: 50%;
-    text-align: center;
-    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: min(10vw, 100px);
+    height: min(10vw, 100px);
     font-size: 22px;
     color: #000;
     font-weight: bold;
