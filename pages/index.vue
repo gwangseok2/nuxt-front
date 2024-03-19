@@ -3,8 +3,7 @@
     <main>
       <!-- :search-keyword="searchKeyword"
         @input="updateSearchkeyword" -->
-      <SearchInput v-model="searchKeyword" @search="searchProducts" />
-      <ul>
+      <!-- <ul>
         <li
           v-for="product in products"
           :key="product.id"
@@ -19,35 +18,32 @@
           <p>{{ product.name }}</p>
           <span>{{ product.price }}$</span>
         </li>
-      </ul>
+      </ul> -->
+      <h1 class="main-title">1112회 로또 추첨</h1>
+      <LottoItem :lottoArray="lottoArray" :bonusNumber="bonus" />
     </main>
-    <aside class="right-float-btn" @click="$router.push('/cart')">
+
+    <button type="button" class="lotto-btn" @click="lottoResult">
+      Draw Lotto!!
+    </button>
+    <!-- <aside class="right-float-btn" @click="$router.push('/cart')">
       <div>Cart To</div>
-    </aside>
+    </aside> -->
   </div>
 </template>
 
 <script>
-import { fetchProductByKeyword, fetchProducts } from '../api/index'
-import SearchInput from '@/components/SearchInput.vue'
+import { fetchProductByKeyword } from '../api/index'
+import LottoItem from '@/components/lotto/LottoItem.vue'
+import { lottoResult } from '@/api/lotto'
 export default {
-  components: { SearchInput },
-  async asyncData() {
-    const response = await fetchProducts()
-    // eslint-disable-next-line no-console
-    const products = response.data.map((item) => ({
-      ...item,
-      imageUrl: `https://picsum.photos/200/300?random=${Math.random()}`,
-    }))
-    // eslint-disable-next-line no-console
-    // console.log('구조분해 프로덕트', ...products)
+  components: { LottoItem },
 
-    // 리턴값은 data와 결합된다 this로 접근가능.
-    return { products }
-  },
   data() {
     return {
       searchKeyword: '',
+      lottoArray: null,
+      bonus: null,
     }
   },
   methods: {
@@ -63,56 +59,38 @@ export default {
         imageUrl: `${item.imageUrl}`,
       }))
     },
+
+    lottoResult() {
+      lottoResult().then((res) => {
+        this.lottoArray = res.resultList
+        this.bonus = res.bonus
+      })
+    },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.flex {
-  display: flex;
-  justify-content: center;
-}
-.item {
-  display: inline-block;
-  width: 400px;
-  height: 300px;
+.main-title {
+  margin-top: 50px;
+  font-size: 40px;
   text-align: center;
-  margin: 0 0.5rem;
-  cursor: pointer;
 }
-.product-image {
-  width: 400px;
-  height: 250px;
-}
-.app {
-  position: relative;
-}
-.cart-wrapper {
-  position: sticky;
-  float: right;
-  bottom: 50px;
-  right: 50px;
-}
-.cart-wrapper .btn {
-  display: inline-block;
-  height: 40px;
-  font-size: 1rem;
-  font-weight: 500;
-}
-.right-float-btn {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  position: fixed;
-  right: 20px;
-  bottom: 50px;
-  background: #1f80fd;
-  color: #fff;
-}
-.right-float-btn div {
-  text-align: center;
-  line-height: 99px;
-  font-size: 20px;
+
+.lotto-btn {
+  background: 200px;
+  font-size: 30px;
   font-weight: bold;
+  color: #fff;
+  background-color: #394af8;
+  outline: none;
+  border: none;
+  border-radius: 12px;
+  display: block;
+  padding: 20px;
+  margin: 30px auto;
+  &:hover {
+    opacity: 0.8;
+  }
 }
 </style>

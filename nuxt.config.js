@@ -2,12 +2,13 @@ import colors from 'vuetify/es5/util/colors'
 require('dotenv').config()
 export default {
   env: {
-    BASE_URL: process.env.BASE_URL,
+    BASE_URL: process.env.LOTTO_URL,
   },
 
   // server setup
   server: {
-    port: process.env.NODE_ENV === 'production' ? null : 5000,
+    port: process.env.NODE_ENV === 'production' ? null : 3000,
+    host: '0.0.0.0', // 모든 주소에서 접근 가능하도록 설정
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -53,12 +54,12 @@ export default {
   axios: {
     proxy: true,
   },
-
   proxy: {
-    '/api': 'http://localhost:3000',
-    // '/': 'http://localhost:3000',
+    '/repos': {
+      target: 'https://api.github.com', // 외부 API의 주소로 설정
+      pathRewrite: { '^/api': '' },
+    }, // 이 부분에 API 서버 주소를 넣어주세요
   },
-
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],

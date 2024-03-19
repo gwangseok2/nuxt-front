@@ -7,13 +7,16 @@
     </div>
     <ul class="mypage-list">
       <li
-        v-for="item in menuList"
+        v-for="(item, idx) in menuList"
         :key="item.id"
         class="mypage-list-item"
-        @click="moveToMenuPage(item.path)"
+        :class="{ active: isActive(item, idx) }"
+        @click="moveToMenuPage(item.path, item)"
       >
         <img :src="item.icon" :alt="item.icon" class="mypage-list-item-icon" />
         <span>{{ item.text }}</span>
+        <span>{{ isActive(item) }}</span>
+
         <span class="mypage-list-item-btn"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
@@ -30,6 +33,7 @@
             /></svg
         ></span>
       </li>
+      <li @click="testhandle">테스트 핸들러</li>
     </ul>
   </div>
 </template>
@@ -79,16 +83,32 @@ export default {
         {
           id: 6,
           icon: 'https://cdn.icon-icons.com/icons2/3788/PNG/512/love_wedding_valentine_heart_navigation_location_pin_map_icon_232555.png',
-          text: '고객센터',
+          text: '고객센zz터',
           path: '',
         },
       ],
+      cartList: [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }],
+      active: false,
     }
   },
+
   methods: {
-    moveToMenuPage(path) {
+    moveToMenuPage(path, item) {
       if (!path) return
       this.$router.push(`mypage/${path}`)
+    },
+    isActive(item, idx) {
+      const active = this.cartList.some((el) => {
+        return el.id === item.id
+      })
+
+      return active
+      // item.id
+      // console.log(result)
+      // return result
+    },
+    testhandle() {
+      this.cartList.pop()
     },
   },
 }
@@ -157,6 +177,10 @@ export default {
         transform: translateY(-50%);
         right: 0;
       }
+    }
+    &-item.active {
+      font-size: 30px;
+      font-weight: bold;
     }
   }
 }

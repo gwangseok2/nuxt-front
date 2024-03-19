@@ -1,15 +1,13 @@
 <template>
   <header>
-    <nuxt-link :to="{ path: '/' }"><h1>빌드테스트03</h1></nuxt-link>
-    <ul>
-      <nuxt-link :to="{ path: '/detail/product_game' }" tag="li"
-        >가위바위보게임</nuxt-link
+    <ul class="nav-list">
+      <li
+        v-for="item in gnbData"
+        :key="item.id"
+        @click="router.push(item.path)"
+        :class="item.className"
       >
-      <li>{{ message }}</li>
-      <li><button @click="changeData">워딩반전버튼</button></li>
-      <li>{{ watch }}</li>
-      <li>
-        <nuxt-link :to="{ path: '/study' }">스터디 페이지</nuxt-link>
+        {{ item.name }}
       </li>
     </ul>
   </header>
@@ -26,9 +24,18 @@ export default {
     }
   },
 
+  computed: {
+    gnbData() {
+      return [
+        { id: 0, path: '/', name: 'Lotto Draw', className: 'logo' },
+        { id: 1, path: '/lotto', name: 'Start Lotto', className: '' },
+      ]
+    },
+  },
+
   watch: {
     message(newVal, oldVal) {
-      console.log(newVal, oldVal);
+      console.log(newVal, oldVal)
       this.watch = '감시후'
     },
   },
@@ -48,25 +55,25 @@ a {
 }
 header {
   width: 100%;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  background-color: #1f80fd;
-  color: #fff;
-  font-weight: bold;
-  box-sizing: border-box;
-  padding: 0 21vw;
-  justify-content: space-between;
-  ul {
-    list-style: none;
+  height: 60px;
+  background: linear-gradient(72deg, #4252f6, #cbfdff);
+  .nav-list {
+    height: 100%;
     display: flex;
-    width: 70%;
-    justify-content: space-between;
     align-items: center;
-    li button {
-      border: 1px solid #fff;
-      color: #fff;
-      border-radius: 8px;
+    font-size: 24px;
+    font-family: Catamaran;
+    color: #fff;
+    padding: 0 30px;
+    & > .logo {
+      font-weight: 800;
+      margin-right: 50px;
+      font-size: 28px;
+      opacity: 0.7;
+    }
+    & > li {
+      cursor: pointer;
+      opacity: 0.8;
     }
   }
 }
