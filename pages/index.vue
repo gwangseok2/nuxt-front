@@ -26,6 +26,16 @@
     <button type="button" class="lotto-btn" @click="lottoResult">
       Draw Lotto!!
     </button>
+
+    <ul>
+      <li>
+        <h2 class="sub-title">최근 10번 추첨 기록</h2>
+      </li>
+      <li v-for="lotto in prevLottoArray" :key="lotto.id">
+        <span>{{ lotto.title }}</span>
+        <span></span>
+      </li>
+    </ul>
     <!-- <aside class="right-float-btn" @click="$router.push('/cart')">
       <div>Cart To</div>
     </aside> -->
@@ -35,7 +45,7 @@
 <script>
 import { fetchProductByKeyword } from '../api/index'
 import LottoItem from '@/components/lotto/LottoItem.vue'
-import { lottoResult } from '@/api/lotto'
+import { lottoResult, getData } from '@/api/lotto'
 export default {
   components: { LottoItem },
 
@@ -44,8 +54,14 @@ export default {
       searchKeyword: '',
       lottoArray: null,
       bonus: null,
+      prevLottoArray: [],
     }
   },
+
+  async created() {
+    this.prevLottoArray = await getData(10)
+  },
+
   methods: {
     moveToDetail(id) {
       this.$router.push(`detail/${id}`)
@@ -61,9 +77,10 @@ export default {
     },
 
     lottoResult() {
-      lottoResult().then((res) => {
+      lottoResult().then(async (res) => {
         this.lottoArray = res.resultList
         this.bonus = res.bonus
+        this.prevLottoArray = await getData()
       })
     },
   },
@@ -75,6 +92,12 @@ export default {
   margin-top: 50px;
   font-size: 40px;
   text-align: center;
+}
+
+.sub-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .lotto-btn {

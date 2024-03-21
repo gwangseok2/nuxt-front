@@ -35,26 +35,25 @@ function addNumber() {
 
 function bonusNumCall() {
   bonus = Math.floor(Math.random() * 45 + 1)
+  console.log(bonus, '재귀함수')
   if (!result.includes(bonus)) {
     return bonus
-  } else {
-    bonusNumCall()
   }
+  bonusNumCall()
 }
 
-export function lottoResult() {
+export async function lottoResult() {
   while (result.length < 6) {
     addNumber()
   }
   console.log(result, '로또 추첨 결과')
   resultArray.push({ [`${resultArray.length}회차`]: [...result] })
-
+  bonus = await bonusNumCall()
+  console.log(bonus, '=보너스')
   const data = saveLotto()
     .then(() => {
       const payload = result
-      const bonus = bonusNumCall()
       lottoClear()
-      console.log(payload, '--')
       return { resultList: payload, bonus }
     })
     .catch((e) => console.log(e))
@@ -77,13 +76,28 @@ function lottoClear() {
 // 로또저장API
 async function saveLotto() {
   const response = await instance.post(`/repos/gwangseok2/lotto-save/issues`, {
-    title: `${dateString} 로또 추첨 ${JSON.stringify(result)}`,
-    body: `로또번호 추첨결과: ${JSON.stringify(
+    title: `${dateString} 로또 추첨 ${JSON.stringify(
       result
-    )} \n 보너스번호 ${JSON.stringify(result[result.length - 1])}`,
+    )} 보너스번호 ${bonus}`,
+    body: `로또번호 추첨결과: ${JSON.stringify(result)} \n 보너스번호 ${bonus}`,
     label: 'bug',
   })
+
   console.log(response, '스테이터스')
+}
+
+export const getData = async (count = 10) => {
+  console.log('겟데이터 호출')
+  try {
+    const response = await instance.get(`/repos/gwangseok2/lotto-save/issues`, {
+      params: {
+        per_page: count,
+      },
+    })
+    return response.data
+  } catch (e) {
+    console.error(e, 'getData error')
+  }
 }
 
 // 로또반복
