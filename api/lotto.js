@@ -24,8 +24,6 @@ const instance = axios.create({
   },
 })
 
-console.log(process.env.LOTTO_URL, '--lotoURL')
-
 function addNumber() {
   randomNum = Math.floor(Math.random() * 45 + 1)
   if (!result.includes(randomNum)) {
@@ -35,7 +33,6 @@ function addNumber() {
 
 function bonusNumCall() {
   bonus = Math.floor(Math.random() * 45 + 1)
-  console.log(bonus, '재귀함수')
   if (!result.includes(bonus)) {
     return bonus
   }
@@ -48,7 +45,7 @@ export async function lottoResult() {
   }
   console.log(result, '로또 추첨 결과')
   resultArray.push({ [`${resultArray.length}회차`]: [...result] })
-  bonus = await bonusNumCall()
+  bonus = bonusNumCall()
   console.log(bonus, '=보너스')
   const data = saveLotto()
     .then(() => {
