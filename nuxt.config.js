@@ -90,7 +90,7 @@ export default {
   serverMiddleware: [
     {
       path: '/api',
-      handler: './serverMiddleware/api/lotto.js',
+      handler: require.resolve('./serverMiddleware/api/lotto.js'),
     },
   ],
 }
