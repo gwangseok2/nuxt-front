@@ -1,4 +1,4 @@
-const axios = require('axios')
+import axios from 'axios'
 const { parse } = require('url')
 
 module.exports = async (req, res) => {
