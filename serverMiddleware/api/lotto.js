@@ -1,9 +1,7 @@
-const express = require('express')
 const axios = require('axios')
-const app = express()
 
-app.get('/lotto', async (req, res) => {
-  const { drwNo } = req.query
+module.exports = async (req, res) => {
+  const { drwNo } = require('url').parse(req.url, true).query
 
   try {
     const response = await axios.get('https://www.dhlottery.co.kr/common.do', {
@@ -13,10 +11,10 @@ app.get('/lotto', async (req, res) => {
       },
     })
 
-    res.json(response.data)
+    res.setHeader('Content-Type', 'application/json')
+    res.end(JSON.stringify(response.data))
   } catch (error) {
-    res.status(500).json({ error: '로또 API 호출 실패' })
+    res.statusCode = 500
+    res.end(JSON.stringify({ error: '로또 API 호출 실패' }))
   }
-})
-
-module.exports = app
+}
