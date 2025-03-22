@@ -1,4 +1,9 @@
 import colors from 'vuetify/es5/util/colors'
+import { fileURLToPath } from 'url'
+import { dirname, resolve } from 'path'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 require('dotenv').config()
 export default {
@@ -90,7 +95,7 @@ export default {
   serverMiddleware: [
     {
       path: '/api',
-      handler: require.resolve('./serverMiddleware/api/lotto.js'),
+      handler: resolve(__dirname, 'serverMiddleware/api/lotto.js'),
     },
   ],
 }
