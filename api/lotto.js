@@ -31,12 +31,13 @@ function addNumber() {
   }
 }
 
+// 재귀 함수에 호출 부분에 리턴을 꼭 붙일것!!
 function bonusNumCall() {
   bonus = Math.floor(Math.random() * 45 + 1)
   if (!result.includes(bonus)) {
     return bonus
   }
-  bonusNumCall()
+  return bonusNumCall()
 }
 
 export async function lottoResult() {
