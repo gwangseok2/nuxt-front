@@ -19,7 +19,7 @@
           <span>{{ product.price }}$</span>
         </li>
       </ul> -->
-      <h1 class="main-title">1112회 로또 추첨</h1>
+      <h1 class="main-title">1112회 로또 추첨(추후 수정 예정)</h1>
       <LottoItem :lottoArray="lottoArray" :bonusNumber="bonus" />
     </main>
 
