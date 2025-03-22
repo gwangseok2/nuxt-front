@@ -59,7 +59,7 @@ export default {
   proxy: {
     '/repos': {
       target: 'https://api.github.com', // 외부 API의 주소로 설정
-      pathRewrite: { '^/api': '' },
+      // pathRewrite: { '^/api': '' },
     }, // 이 부분에 API 서버 주소를 넣어주세요
   },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
