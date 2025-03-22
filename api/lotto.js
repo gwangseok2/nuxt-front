@@ -11,16 +11,16 @@ const dateString = today.toLocaleDateString('ko-KR', {
   day: 'numeric',
 })
 
-const token1 = 'ghp_dOux2U4g5ucgzf'
-const token2 = 'sjr2UtKDJLuqAhF10NMCFz'
+const token = process.env.GIT_TOKEN
 
+console.log(token, 'token')
 const instance = axios.create({
   baseURL: process.env.LOTTO_URL,
   headers: {
     'Cache-Control': 'no-cache',
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
-    Authorization: `token ${token1}${token2}`,
+    Authorization: `token ${token}`,
   },
 })
 
@@ -47,7 +47,7 @@ export async function lottoResult() {
   resultArray.push({ [`${resultArray.length}회차`]: [...result] })
   bonus = bonusNumCall()
   console.log(bonus, '=보너스')
-  const data = saveLotto()
+  const data = await saveLotto()
     .then(() => {
       const payload = result
       lottoClear()

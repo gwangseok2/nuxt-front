@@ -3,6 +3,7 @@ require('dotenv').config()
 export default {
   env: {
     BASE_URL: process.env.LOTTO_URL,
+    GIT_TOKEN: process.env.GIT_TOKEN,
   },
 
   // server setup
