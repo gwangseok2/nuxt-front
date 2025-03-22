@@ -1,24 +1,18 @@
-import colors from 'vuetify/es5/util/colors'
-import { fileURLToPath } from 'url'
-import { dirname, resolve } from 'path'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
+const colors = require('vuetify/es5/util/colors')
+const path = require('path')
 require('dotenv').config()
-export default {
+
+module.exports = {
   env: {
     BASE_URL: process.env.LOTTO_URL,
     GIT_TOKEN: process.env.GIT_TOKEN,
   },
 
-  // server setup
   server: {
     port: process.env.NODE_ENV === 'production' ? null : 3000,
-    host: '0.0.0.0', // 모든 주소에서 접근 가능하도록 설정
+    host: '0.0.0.0',
   },
 
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - nuxt-front',
     title: 'nuxt-front',
@@ -34,41 +28,27 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/css/reset.css'],
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
-    // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify',
-  ],
+  buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/vuetify'],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
-  ],
+  modules: ['@nuxtjs/axios'],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
-    baseURL: '/', // 서버/클라이언트 둘 다 상대 경로 잘 처리됨
+    baseURL: '/',
   },
+
   proxy: {
     '/repos': {
-      target: 'https://api.github.com', // 외부 API의 주소로 설정
-      // pathRewrite: { '^/api': '' },
-    }, // 이 부분에 API 서버 주소를 넣어주세요
+      target: 'https://api.github.com',
+    },
   },
-  // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
+
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
@@ -87,7 +67,6 @@ export default {
     },
   },
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     postcss: null,
   },
@@ -95,7 +74,7 @@ export default {
   serverMiddleware: [
     {
       path: '/api',
-      handler: resolve(__dirname, 'serverMiddleware/api/lotto.js'),
+      handler: path.resolve(__dirname, 'serverMiddleware/api/lotto.js'),
     },
   ],
 }
