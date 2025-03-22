@@ -103,3 +103,40 @@ export const getData = async (count = 10) => {
 
 // 로또추첨
 // lottoResult()
+
+function getLatestDrwNo() {
+  const startDate = new Date('2002-12-07T00:00:00') // 1회차 기준
+  const today = new Date()
+  const diffInMs = today - startDate
+  const diffInWeeks = Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 7))
+  return diffInWeeks + 1
+}
+
+export const getLottoResult = async () => {
+  const drwNo = getLatestDrwNo()
+  try {
+    const response = await axios.get(`/api/lotto?drwNo=${drwNo}`)
+    if (response.data.returnValue === 'success') {
+      const {
+        drwtNo1,
+        drwtNo2,
+        drwtNo3,
+        drwtNo4,
+        drwtNo5,
+        drwtNo6,
+        bnusNo,
+        drwNoDate,
+      } = response.data
+      return {
+        drawNumber: drwNo,
+        date: drwNoDate,
+        numbers: [drwtNo1, drwtNo2, drwtNo3, drwtNo4, drwtNo5, drwtNo6],
+        bonus: bnusNo,
+      }
+    } else {
+      throw new Error('아직 추첨 결과 없음')
+    }
+  } catch (e) {
+    console.error('로또 결과 가져오기 실패:', e.message)
+  }
+}

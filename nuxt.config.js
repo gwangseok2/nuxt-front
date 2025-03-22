@@ -54,6 +54,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
+    baseURL: '/', // 서버/클라이언트 둘 다 상대 경로 잘 처리됨
   },
   proxy: {
     '/repos': {
@@ -84,4 +85,8 @@ export default {
   build: {
     postcss: null,
   },
+
+  serverMiddleware: [
+    { path: '/api', handler: '~/serverMiddleware/api/lotto.js' },
+  ],
 }

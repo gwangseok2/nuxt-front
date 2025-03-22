@@ -1,51 +1,38 @@
 <template>
   <div class="app">
-    <main>
-      <!-- :search-keyword="searchKeyword"
-        @input="updateSearchkeyword" -->
-      <!-- <ul>
-        <li
-          v-for="product in products"
-          :key="product.id"
-          class="flex item"
-          @click="moveToDetail(product.id)"
-        >
-          <img
-            :src="product.imageUrl"
-            :alt="product.name"
-            class="product-image"
-          />
-          <p>{{ product.name }}</p>
-          <span>{{ product.price }}$</span>
-        </li>
-      </ul> -->
-      <h1 class="main-title">1112회 로또 추첨(추후 수정 예정)</h1>
-      <LottoItem :lottoArray="lottoArray" :bonusNumber="bonus" />
-    </main>
+    <section class="flex-wrapper">
+      <article>
+        <h1 class="main-title">{{ currentLottoTurn + 1 }}회차 로또 추첨</h1>
+        <LottoItem :lottoArray="lottoArray" :bonusNumber="bonus" />
 
-    <button type="button" class="lotto-btn" @click="lottoResult">
-      Draw Lotto!!
-    </button>
+        <button type="button" class="lotto-btn" @click="lottoResult">
+          Draw Lotto!!
+        </button>
 
-    <ul>
-      <li>
+        <h2 class="main-title">이전 회차 당첨번호</h2>
+        <LottoItem
+          :lottoArray="prevWinnerNumberArray"
+          :bonusNumber="prevWinnerNumberArray[prevWinnerNumberArray.length - 1]"
+        />
+      </article>
+      <article>
         <h2 class="sub-title">최근 10번 추첨 기록</h2>
-      </li>
-      <li v-for="lotto in prevLottoArray" :key="lotto.id">
-        <span>{{ lotto.title }}</span>
-        <span></span>
-      </li>
-    </ul>
-    <!-- <aside class="right-float-btn" @click="$router.push('/cart')">
-      <div>Cart To</div>
-    </aside> -->
+
+        <ul class="git-hub-array">
+          <li v-for="lotto in prevLottoArray" :key="lotto.id">
+            <span class="lotto-title">{{ lotto.title }}</span>
+            <span></span>
+          </li>
+        </ul>
+      </article>
+    </section>
   </div>
 </template>
 
 <script>
 import { fetchProductByKeyword } from '../api/index'
 import LottoItem from '@/components/lotto/LottoItem.vue'
-import { lottoResult, getData } from '@/api/lotto'
+import { lottoResult, getData, getLottoResult } from '@/api/lotto'
 export default {
   components: { LottoItem },
 
@@ -55,6 +42,8 @@ export default {
       lottoArray: null,
       bonus: null,
       prevLottoArray: [],
+      prevWinnerNumberArray: [],
+      currentLottoTurn: undefined,
     }
   },
 
@@ -62,7 +51,19 @@ export default {
     this.prevLottoArray = await getData(10)
   },
 
+  mounted() {
+    this.fetchPrevWinnderNumber()
+  },
+
   methods: {
+    async fetchPrevWinnderNumber() {
+      const { drawNumber, numbers } = await getLottoResult()
+      this.currentLottoTurn = drawNumber
+      this.prevWinnerNumberArray = numbers
+      console.log(this.currentLottoTurn, 'turn')
+      console.log(this.prevLottoArray, 'nummbers')
+    },
+
     moveToDetail(id) {
       this.$router.push(`detail/${id}`)
     },
@@ -95,9 +96,20 @@ export default {
 }
 
 .sub-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 10px;
+  text-align: left;
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+
+.git-hub-array {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  & > li {
+    padding: 5px 0;
+    font-weight: 500;
+    font-size: 18px;
+  }
 }
 
 .lotto-btn {
@@ -116,4 +128,29 @@ export default {
     opacity: 0.8;
   }
 }
+.flex-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: 100px;
+  & > article {
+    flex: 1;
+    // padding: 0 10px;
+  }
+  & > article:first-child {
+    border-right: 1px solid #ececec;
+  }
+}
+// .flex-wrapper::after {
+//   content: '';
+//   display: block;
+//   position: absolute;
+//   width: 3px;
+//   height: 100%;
+//   background-color: #000;
+//   left: 50%;
+//   top: 50%;
+//   transform: translate(-50%, -50%);
+// }
 </style>
