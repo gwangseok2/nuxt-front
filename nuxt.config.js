@@ -1,8 +1,8 @@
-const colors = require('vuetify/es5/util/colors')
-const path = require('path')
+import colors from 'vuetify/es5/util/colors'
+import { resolve } from 'path'
 require('dotenv').config()
 
-module.exports = {
+export default {
   env: {
     BASE_URL: process.env.LOTTO_URL,
     GIT_TOKEN: process.env.GIT_TOKEN,
@@ -16,9 +16,7 @@ module.exports = {
   head: {
     titleTemplate: '%s - nuxt-front',
     title: 'nuxt-front',
-    htmlAttrs: {
-      lang: 'en',
-    },
+    htmlAttrs: { lang: 'en' },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -31,7 +29,6 @@ module.exports = {
   css: ['@/assets/css/reset.css'],
 
   plugins: [],
-
   components: true,
 
   buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/vuetify'],
@@ -74,7 +71,7 @@ module.exports = {
   serverMiddleware: [
     {
       path: '/api',
-      handler: path.resolve(__dirname, 'serverMiddleware/api/lotto.js'),
+      handler: require.resolve('./serverMiddleware/api/lotto.js'), // ✅ 핵심
     },
   ],
 }
