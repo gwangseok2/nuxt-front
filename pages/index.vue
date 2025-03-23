@@ -12,8 +12,9 @@
         <h2 class="main-title">이전 회차 당첨번호</h2>
         <LottoItem
           :lottoArray="prevWinnerNumberArray"
-          :bonusNumber="prevWinnerNumberArray[prevWinnerNumberArray.length - 1]"
+          :bonusNumber="prevWinnerBonusNumber"
         />
+        {{prevWinnerNumberArray}}
       </article>
       <article>
         <h2 class="sub-title">최근 10번 추첨 기록</h2>
@@ -44,6 +45,7 @@ export default {
       prevLottoArray: [],
       prevWinnerNumberArray: [],
       currentLottoTurn: undefined,
+      prevWinnerBonusNumber: undefined,
     }
   },
 
@@ -57,9 +59,10 @@ export default {
 
   methods: {
     async fetchPrevWinnderNumber() {
-      const { drawNumber, numbers } = await getLottoResult()
+      const { drawNumber, numbers, bnusNo } = await getLottoResult()
       this.currentLottoTurn = drawNumber
       this.prevWinnerNumberArray = numbers
+      this.prevWinnerBonusNumber = bnusNo
       console.log(this.currentLottoTurn, 'turn')
       console.log(this.prevLottoArray, 'nummbers')
     },
