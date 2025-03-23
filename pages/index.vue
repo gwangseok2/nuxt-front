@@ -14,7 +14,6 @@
           :lottoArray="prevWinnerNumberArray"
           :bonusNumber="prevWinnerBonusNumber"
         />
-        {{prevWinnerNumberArray}}
       </article>
       <article>
         <h2 class="sub-title">최근 10번 추첨 기록</h2>
