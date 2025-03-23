@@ -132,6 +132,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   position: relative;
   gap: 100px;
   & > article {
