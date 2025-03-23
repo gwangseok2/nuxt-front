@@ -91,13 +91,13 @@ export default {
 <style lang="scss" scoped>
 .main-title {
   margin-top: 50px;
-  font-size: 40px;
+  font-size: clamp(24px, 5vw, 40px);
   text-align: center;
 }
 
 .sub-title {
   text-align: left;
-  font-size: 40px;
+  font-size: clamp(20px, 4vw, 36px);
   margin-bottom: 30px;
 }
 

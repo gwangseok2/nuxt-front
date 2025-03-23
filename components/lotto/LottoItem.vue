@@ -28,7 +28,7 @@ export default {
 
 <style lang="scss" scoped>
 .lotto-wrapper {
-  max-width: 700px;
+  max-width: 89.33%;
   margin: 0 auto;
   display: flex;
   gap: 5px;
@@ -37,22 +37,23 @@ export default {
   padding: 30px 0;
   margin-top: 20px;
   .title {
-    font-size: 35px;
+    font-size: clamp(15px, 4vw, 22px);
     margin-right: 5px;
+    flex-shrink: 0;
   }
   .bar {
-    font-size: min(10vw, 30px);
+    font-size: min(10vw, 15px);
   }
   & > .lotto-item {
+    display:flex;
     flex-shrink: 0;
     border: 2px solid #593af8;
     border-radius: 50%;
-    display: flex;
     justify-content: center;
     align-items: center;
-    width: min(10vw, 55px);
-    height: min(10vw, 55px);
-    font-size: 22px;
+    width: clamp(30px, 4vw, 55px);
+    height: clamp(30px, 4vw, 55px);
+    font-size: clamp(15px, 2vw, 22px);
     color: #000;
     font-weight: bold;
   }
