@@ -2,13 +2,13 @@
   <div class="app">
     <section class="flex-wrapper">
       <article>
-        <h1 class="main-title">{{ currentLottoTurn + 1 }}회차 로또 추첨</h1>
+        <h1 class="main-title">{{ currentLottoTurn }}회차 로또 추첨</h1>
         <LottoItem :lottoArray="lottoArray" :bonusNumber="bonus" />
 
         <button type="button" class="lotto-btn" @click="lottoResult">
           Draw Lotto!!
         </button>
-
+        <hr />
         <h2 class="main-title">이전 회차 당첨번호</h2>
         <LottoItem
           :lottoArray="prevWinnerNumberArray"
@@ -32,7 +32,12 @@
 <script>
 import { fetchProductByKeyword } from '../api/index'
 import LottoItem from '@/components/lotto/LottoItem.vue'
-import { lottoResult, getData, getLottoResult } from '@/api/lotto'
+import {
+  lottoResult,
+  getData,
+  getLottoResult,
+  getLatestDrwNo,
+} from '@/api/lotto'
 export default {
   components: { LottoItem },
 
@@ -43,7 +48,6 @@ export default {
       bonus: null,
       prevLottoArray: [],
       prevWinnerNumberArray: [],
-      currentLottoTurn: undefined,
       prevWinnerBonusNumber: undefined,
     }
   },
@@ -52,18 +56,22 @@ export default {
     this.prevLottoArray = await getData(10)
   },
 
+  computed: {
+    currentLottoTurn() {
+      return getLatestDrwNo() + 1
+    },
+  },
+
   mounted() {
     this.fetchPrevWinnderNumber()
   },
 
   methods: {
     async fetchPrevWinnderNumber() {
-      const { drawNumber, numbers, bnusNo } = await getLottoResult()
+      const { drawNumber, numbers, bonus } = await getLottoResult()
       this.currentLottoTurn = drawNumber
-      this.prevWinnerNumberArray = numbers
-      this.prevWinnerBonusNumber = bnusNo
-      console.log(this.currentLottoTurn, 'turn')
-      console.log(this.prevLottoArray, 'nummbers')
+      this.prevWinnerNumberArray = [...numbers].sort((a, b) => a - b)
+      this.prevWinnerBonusNumber = bonus
     },
 
     moveToDetail(id) {
@@ -81,7 +89,7 @@ export default {
 
     lottoResult() {
       lottoResult().then(async (res) => {
-        this.lottoArray = res.resultList
+        this.lottoArray = [...res.resultList].sort((a, b) => a - b)
         this.bonus = res.bonus
         this.prevLottoArray = await getData()
       })

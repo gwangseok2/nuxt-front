@@ -104,7 +104,7 @@ export const getData = async (count = 10) => {
 // 로또추첨
 // lottoResult()
 
-function getLatestDrwNo() {
+export function getLatestDrwNo() {
   const startDate = new Date('2002-12-07T00:00:00') // 1회차 기준
   const today = new Date()
   const diffInMs = today - startDate
